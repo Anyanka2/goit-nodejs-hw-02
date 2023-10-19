@@ -22,5 +22,9 @@ const updateSchema = Joi.object({
 const updateStatusSchema = Joi.object({
   favorite: Joi.boolean(),
 });
-
-module.exports = { addSchema, updateSchema,updateStatusSchema };
+const contactValidation = {
+  addSchema,
+  updateSchema,
+  updateStatusSchema,
+};
+module.exports = { contactValidation };

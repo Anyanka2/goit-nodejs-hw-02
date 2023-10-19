@@ -1,9 +1,7 @@
 const express = require("express");
 const {
-  addSchema,
-  updateSchema,
-  updateStatusSchema,
-} = require("../../schemas/contacts.js");
+  contactValidation
+} = require("../../validation/contacts.js");
 const HttpError = require("../../helpers/HttpError.js");
 
 const contactsHandler = require("../../controllers/contacts.js");
@@ -34,7 +32,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { error } = addSchema.validate(req.body);
+    const { error } = contactValidation.addSchema.validate(req.body);
     if (error) {
       return HttpError(res, 400, error.message);
     }
@@ -63,7 +61,7 @@ router.delete("/:id", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const { error } = updateSchema.validate(req.body);
+    const { error } = contactValidation.updateSchema.validate(req.body);
     if (error) {
       return HttpError(res, 400, error.message);
     }
@@ -80,7 +78,7 @@ router.put("/:id", async (req, res, next) => {
 });
 router.patch("/:id/favorite", async (req, res, next) => {
   try {
-    const { error } = updateStatusSchema.validate(req.body);
+    const { error } = contactValidation.updateStatusSchema.validate(req.body);
     if (error) {
       return HttpError(res, 400, error.message);
     }
