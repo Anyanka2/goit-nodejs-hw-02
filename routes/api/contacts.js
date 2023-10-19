@@ -24,7 +24,7 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params;
     const result = await contactsHandler.getContactById(id);
     if (!result) {
-      throw HttpError(404, "Not found");
+      return HttpError(res, 404, "Not found");
     }
     return res.status(200).json(result);
   } catch (error) {
@@ -36,7 +36,7 @@ router.post("/", async (req, res, next) => {
   try {
     const { error } = addSchema.validate(req.body);
     if (error) {
-      throw HttpError(400, error.message);
+      return HttpError(res, 400, error.message);
     }
     const { name, email, phone } = req.body;
     const result = await contactsHandler.addContact(name, email, phone);
@@ -51,7 +51,7 @@ router.delete("/:id", async (req, res, next) => {
     const { id } = req.params;
     const result = await contactsHandler.removeContact(id);
     if (!result) {
-      throw HttpError(404, "Not found");
+      return HttpError(res, 404, "Not found");
     }
     return res.status(200).json({
       message: "Contact deleted",
@@ -65,13 +65,13 @@ router.put("/:id", async (req, res, next) => {
   try {
     const { error } = updateSchema.validate(req.body);
     if (error) {
-      throw HttpError(400, error.message);
+      return HttpError(res, 400, error.message);
     }
     const { id } = req.params;
     const { name, email, phone } = req.body;
     const result = await contactsHandler.updateContact(id, name, email, phone);
     if (!result) {
-      throw HttpError(404, "Not found");
+      return HttpError(res, 404, "Not found");
     }
     return res.status(200).json(result);
   } catch (error) {
@@ -82,7 +82,7 @@ router.patch("/:id/favorite", async (req, res, next) => {
   try {
     const { error } = updateStatusSchema.validate(req.body);
     if (error) {
-      throw HttpError(400, error.message);
+      return HttpError(res, 400, error.message);
     }
     const { id } = req.params;
     const result = await contactsHandler.updateStatusContact(
@@ -90,7 +90,7 @@ router.patch("/:id/favorite", async (req, res, next) => {
       req.body.favorite
     );
     if (!result) {
-      throw HttpError(404, "Not found");
+      return HttpError(res, 404, "Not found");
     }
     return res.status(200).json(result);
   } catch (error) {
