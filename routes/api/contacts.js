@@ -1,7 +1,5 @@
 const express = require("express");
-const {
-  contactValidation
-} = require("../../validation/contacts.js");
+const { contactValidation } = require("../../validation/contacts.js");
 const HttpError = require("../../helpers/HttpError.js");
 
 const contactsHandler = require("../../controllers/contacts.js");
