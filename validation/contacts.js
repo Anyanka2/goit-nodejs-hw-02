@@ -27,4 +27,4 @@ const contactValidation = {
   updateSchema,
   updateStatusSchema,
 };
-module.exports = { contactValidation };
+module.exports = contactValidation;

@@ -16,4 +16,4 @@ const authValidation = {
   loginSchema,
 };
 
-module.exports = { authValidation };
+module.exports = authValidation;

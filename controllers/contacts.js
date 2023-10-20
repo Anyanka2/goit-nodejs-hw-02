@@ -1,4 +1,5 @@
 const Contact = require("../models/contact.js");
+const ctrlWrapper = require("../helpers/ctrlWrapper.js")
 
 const listContacts = async () => {
   const data = await Contact.find();
@@ -47,10 +48,10 @@ const updateStatusContact = async (id, status) => {
 };
 
 module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-  updateStatusContact,
+  listContacts: ctrlWrapper(listContacts),
+  getContactById: ctrlWrapper(getContactById),
+  removeContact: ctrlWrapper(removeContact),
+  addContact: ctrlWrapper(addContact),
+  updateContact: ctrlWrapper(updateContact),
+  updateStatusContact: ctrlWrapper(updateStatusContact),
 };
