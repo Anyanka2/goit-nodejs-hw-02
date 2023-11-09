@@ -13,6 +13,9 @@ router.post(
   validateBody(authValidation.registerSchema),
   ctrl.register
 );
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post("/verify", ctrl.resendVerifyEmail);
 
 router.post("/login", validateBody(authValidation.loginSchema), ctrl.login);
 
